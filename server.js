@@ -14,14 +14,19 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 
 // creiamo il server
-const server = http.createServer(function (req, res) {
+const serverAsync = http.createServer((req, res) => {
+    loadNorrisJokes((data) => {
+        // console.log(data);
+        // Estraggo solo il campo "value" dall'oggetto API
+        const jokeValue = data.value;
 
-    const jokes = loadNorrisJokes();
-
-    return
+        // Invio il campo "value" come risposta HTTP
+        res.writeHead(200, { "Content-Type": "text/plain" });
+        res.end(jokeValue);
+    });
 });
 
 // mettiamo il server in ascolto 
-server.listen(port, function () {
+serverAsync.listen(port, function () {
     console.log("Server is running on http://localhost:" + port);
 });
