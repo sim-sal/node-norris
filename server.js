@@ -21,7 +21,7 @@ const serverAsync = http.createServer((req, res) => {
         const jokeValue = data.value;
 
         // Invio il campo "value" come risposta HTTP
-        res.writeHead(200, { "Content-Type": "text/plain" });
+        res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
         res.end(jokeValue);
     });
 });
